@@ -16,9 +16,9 @@ class App extends React.Component {
   render() {
     return (
       <main className="App">
-        {/* <Header />
-        <PosterGrid />
-        <SelectedMovie /> */}
+        {/* <Header /> */}
+        <PosterGrid movies={this.state.movies.movies}/>
+        {/* <SelectedMovie /> */}
       </main>
   );
   }

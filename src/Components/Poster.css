@@ -1,0 +1,11 @@
+.poster-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.poster-img {
+  width: 200px;
+  height: 400px;
+  object-fit: contain;
+  cursor: pointer;
+}
