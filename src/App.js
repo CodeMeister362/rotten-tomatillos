@@ -9,18 +9,37 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      movies: MovieData
+      movies: MovieData,
+      singleMovie: null
     }
   }
 
+  getMovie = (id) => {
+    const movie = this.state.movies.movies.filter(movie => {
+     return movie.id === id
+    })
+    this.setState({ singleMovie: movie })
+  }
+
   render() {
-    return (
-      <main className="App">
-        {/* <Header /> */}
-        <PosterGrid movies={this.state.movies.movies}/>
-        {/* <SelectedMovie /> */}
-      </main>
-  );
+    if(this.state.singleMovie === null) {
+      return (
+        <main className="App">
+          <PosterGrid 
+            movies={this.state.movies.movies}
+            getMovie={this.getMovie}
+          />
+        </main>
+    );
+    } else {
+     return (
+        <main className="App">
+          <SelectedMovie 
+            movie={this.state.singleMovie}
+          />
+        </main>)
+    }
+
   }
 }
 
