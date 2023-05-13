@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import './Poster.css'
 
-const Poster = ({id, posterPath})  =>  {
+const Poster = ({id, posterPath, getMovie})  =>  {
   return(
     <div className='poster-wrapper'>
-      {/* <h1>{id}</h1> */}
-      <img src={posterPath} className="poster-img"/>
+      <img src={posterPath} className="poster-img" onClick={() => getMovie(id)}/>
     </div>
   )
 }
