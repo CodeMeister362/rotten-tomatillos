@@ -1,0 +1,11 @@
+.selected-movie {
+  height: 100vh;
+  width: 100vw;
+  border: 5px red solid;
+}
+
+.poster {
+  max-height: 400px;
+  max-width: 200px;
+  border: 5px limegreen solid;
+}

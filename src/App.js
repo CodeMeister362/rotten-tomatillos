@@ -16,15 +16,19 @@ class App extends React.Component {
 
   getMovie = (id) => {
     const movie = this.state.movies.movies.filter(movie => {
-     return movie.id === id
+      return movie.id === id
     })
     this.setState({ singleMovie: movie })
+  }
+
+  backButton = () =>  {
+    this.setState({ singleMovie: null })
   }
 
   render() {
     if(this.state.singleMovie === null) {
       return (
-        <main className="App">
+        <main className="App" style={{"height" : "100%", "width" : "100%"}}>
           <PosterGrid 
             movies={this.state.movies.movies}
             getMovie={this.getMovie}
@@ -32,11 +36,12 @@ class App extends React.Component {
         </main>
     );
     } else {
-     return (
-        <main className="App">
+      return (
+        <main className="App" style={{"height" : "100%", "width" : "100%"}}>
           <SelectedMovie 
             movie={this.state.singleMovie}
-          />
+            backButton={this.backButton}
+          /> 
         </main>)
     }
 
