@@ -1,8 +1,10 @@
 .App {
-  text-align: center;
-  border: 5px hotpink solid;
-  height: 100vh;
+  min-height: 100vh;
+  height: fit-content;
   width: 100vw;
+  background-color: black;
+  text-align: center;
+  /* border: 5px hotpink solid; */
 }
 
 /* .App-logo {
