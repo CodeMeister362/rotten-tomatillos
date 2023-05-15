@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+// file imports 
 import './App.css';
+
+// component imports 
+import React, { useState } from 'react'
 import Header from './Components/Header'
+import Spinner from './Components/Spinner'
 import PosterGrid from './Components/PosterGrid'
 import SelectedMovie from './Components/SelectedMovie'
-// import MovieData from './MockData/MovieData'
-import Spinner from './Components/Spinner'
 
+// class constructor 
 class App extends React.Component {
   constructor() {
     super()
@@ -16,6 +19,7 @@ class App extends React.Component {
 
   }
 
+// lifecycle methods 
   componentDidMount = () => {
     fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies")
         .then((response) => response.json())
@@ -25,6 +29,7 @@ class App extends React.Component {
         )
       }
 
+// functions
   getMovie = (id) => {
     const movie = this.state.movies.movies.filter(movie => {
       return movie.id === id
@@ -36,17 +41,20 @@ class App extends React.Component {
     this.setState({ singleMovie: null })
   }
 
+// component render
   render() {
     if(this.state.movies === null) {
       return(
-        <main className="App" style={{"height" : "100%", "width" : "100%"}}>
+        <main className="App">
+          <Header />
           <Spinner />
         </main>
       )
     }
     if(this.state.singleMovie === null) {
       return (
-        <main className="App" style={{"height" : "100%", "width" : "100%"}}>
+        <main className="App">
+          <Header />
           <PosterGrid 
             movies={this.state.movies.movies}
             getMovie={this.getMovie}
@@ -55,7 +63,8 @@ class App extends React.Component {
     );
     } else {
       return (
-        <main className="App" style={{"height" : "100%", "width" : "100%"}}>
+        <main className="App">
+          <Header />
           <SelectedMovie 
             movie={this.state.singleMovie}
             backButton={this.backButton}
