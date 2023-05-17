@@ -1,8 +1,9 @@
 // file imports 
-import './App.css';
+import './App.css'
 
 // component imports 
-import React, { useState } from 'react'
+import React from 'react';
+import { Route } from 'react-router-dom'
 import Header from './Components/Header'
 import Spinner from './Components/Spinner'
 import PosterGrid from './Components/PosterGrid'
@@ -16,7 +17,6 @@ class App extends React.Component {
       movies: null,
       singleMovie: null
     }
-
   }
 
 // lifecycle methods 
@@ -24,13 +24,13 @@ class App extends React.Component {
     fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies")
         .then((response) => response.json())
         .then((data) => this.setState({movies: data}))
-        .then(console.log(this.state.movies))
         .catch((err)  => this.setState({error: err.message})
         )
       }
 
 // functions
   getMovie = (id) => {
+    console.log(id)
     const movie = this.state.movies.movies.filter(movie => {
       return movie.id === id
     })
@@ -45,33 +45,55 @@ class App extends React.Component {
   render() {
     if(this.state.movies === null) {
       return(
-        <main className="App">
-          <Header />
-          <Spinner />
-        </main>
+          <main className="App">
+            <Route 
+              path="/"
+              render = {() => (
+                <div>  
+                  <Header />
+                  <Spinner />
+                </div>
+              )
+            }/>
+          </main>
       )
     }
     if(this.state.singleMovie === null) {
       return (
         <main className="App">
-          <Header />
-          <PosterGrid 
-            movies={this.state.movies.movies}
-            getMovie={this.getMovie}
-          />
+          <Route 
+              path="/"
+              render = {() => (
+                <div>  
+                  <Header />
+                  <PosterGrid 
+                    movies={this.state.movies.movies}
+                    getMovie={this.getMovie}
+                  />
+                </div>
+              )
+            }/>
         </main>
     );
     } else {
       return (
         <main className="App">
-          <Header />
-          <SelectedMovie 
-            movie={this.state.singleMovie}
-            backButton={this.backButton}
-          /> 
-        </main>)
+          <Route 
+            path="/:id"
+            render = {({ match })  =>  {
+              return(
+                <div>
+                <Header />
+                <SelectedMovie 
+                movie={this.state.singleMovie}
+                backButton={this.backButton} /> 
+              </div>
+              )
+              }}
+          />  
+        </main>
+      )
     }
-
   }
 }
 
