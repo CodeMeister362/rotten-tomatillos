@@ -10,7 +10,7 @@ const Header = ()  =>  {
   const refresh = () => window.location.reload(true)
   return(
     <div className="header-container">
-      <img className="logo" src={logo} onClick={refresh} alt="logo-image"/>
+      <img className="logo" src={logo} onClick={refresh} alt="rotten-tomatillos-logo"/>
     </div>
   )
 }
