@@ -3,18 +3,12 @@ import './PosterGrid.css'
 
 // component imports 
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
 import Poster from './Poster'
 
 // component 
 const PosterGrid = ({movies, getMovie}) =>  {
-  const posters = movies?.map(movie => {
-    let URL = `${movie.id}`;
+  const posters = movies.map(movie => {
     return(
-      // <Route
-      //   key={movie.id}
-      //   path="/:URL"
-      //   render = {()  =>  (
           <Poster
             key={movie.id}
             id={movie.id}
@@ -22,8 +16,6 @@ const PosterGrid = ({movies, getMovie}) =>  {
             posterPath={movie.poster_path}
             getMovie={getMovie}
           />
-      //   )}
-      // />
     )
   })
 
