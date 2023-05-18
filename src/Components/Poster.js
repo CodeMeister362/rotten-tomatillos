@@ -7,6 +7,7 @@ import React, { Component } from 'react'
 
 // component
 const Poster = ({id, title, posterPath, getMovie})  =>  {
+  console.log(title)
   return(
     <Link to={`/${id}`} key={id}>
       <div className='poster-wrapper'>
