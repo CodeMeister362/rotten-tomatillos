@@ -7,8 +7,8 @@ import Poster from './Poster'
 import PropTypes from 'prop-types'
 
 // component 
-const PosterGrid = ({movies, getMovie}) =>  {
-  const posters = movies.map(movie => {
+const PosterGrid = ({movies, getMovie, searchedMovie}) =>  {  
+  const posters = (!searchedMovie.length ? movies : searchedMovie).map(movie => {
     return(
           <Poster
             key={movie.id}
