@@ -17,6 +17,7 @@ class App extends React.Component {
     this.state = {
       movies: [],
       singleMovie: [],
+      searchedMovie: [],
       error: ""
     }
   }
@@ -49,16 +50,11 @@ class App extends React.Component {
   }
 
   getMovieByTitle = (newSearch) => {
-    let lowerCaseTitle = newSearch.toLowerCase()
-
+    let lowerCaseTitle = newSearch.toLowerCase().toString()
     let movieByTitle = this.state.movies.movies.filter(movie => {
-      if(movie.title == lowerCaseTitle || movie.title.includes(lowerCaseTitle)){
-        console.log('this', movie)
-        return movie
-      }
-      console.log('here', movieByTitle)
-      this.setState({movies: movie})
+      return movie.title.toLowerCase() === lowerCaseTitle
     })
+    this.setState({ searchedMovie: movieByTitle})
   }
 
 // component render
@@ -100,6 +96,7 @@ class App extends React.Component {
                   <PosterGrid 
                     movies={this.state.movies.movies}
                     getMovie={this.getMovie}
+                    searchedMovie={this.state.searchedMovie}
                   />
                 </div>
               )}/>
