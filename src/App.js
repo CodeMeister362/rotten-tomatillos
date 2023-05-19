@@ -3,7 +3,7 @@ import './App.css'
 
 // component imports 
 import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Header from './Components/Header'
 import Spinner from './Components/Spinner'
 import PosterGrid from './Components/PosterGrid'
@@ -15,14 +15,21 @@ class App extends React.Component {
     super()
     this.state = {
       movies: [],
-      singleMovie: []
+      singleMovie: [],
+      error: ""
     }
   }
 
 // lifecycle methods 
   componentDidMount = () => {
     fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies")
-      .then((response) => response.json())
+      .then((response) => {
+        if(!response.ok) {
+          throw new Error(`${response.status}`)
+        } else {
+          return response.json()
+        }
+      })
       .then((data) => this.setState({movies: data}))
       .catch((err)  => this.setState({error: err.message})
       )
@@ -33,11 +40,7 @@ class App extends React.Component {
     const movie = this.state.movies.movies.filter(movie => {
       return movie.id === id
     })
-    this.setState({ singleMovie: movie })
-  }
-
-  setSelectedView = ()  =>  {
-    this.setState({ singleMovie: [] })
+    this.setState({ singleMovie: [movie] })
   }
 
   backButton = () =>  {
@@ -46,8 +49,15 @@ class App extends React.Component {
 
 // component render
   render() {
-    console.log(this.state);
-    if(this.state.movies.length === 0) {
+    // console.log(this.state);
+    if (this.state.error !== "") {
+      return(
+        <div>
+          <p>{this.state.error} Error</p>
+          <p>Sorry, something's gone wrong. Please try again.</p>
+        </div>
+      )
+    } else if (this.state.movies.length === 0) {
       return(
           <main className="App">
             <Route 
@@ -83,12 +93,14 @@ class App extends React.Component {
                   <div>
                   <Header />
                   <SelectedMovie 
-                  key={match.params.id}
-                  movie={this.state.singleMovie}
-                  backButton={this.backButton} 
+                    key={match.params.id}
+                    id={match.params.id}
+                    getMovie={this.getMovie}
+                    movie={this.state.singleMovie}
+                    backButton={this.backButton} 
                   />
                 </div>
-                )}}/>  
+              )}}/>  
             </Switch>
           </main>
       )
