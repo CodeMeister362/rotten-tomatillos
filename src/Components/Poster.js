@@ -3,11 +3,11 @@ import './Poster.css'
 import { Link } from 'react-router-dom'
 
 // component imports 
-import React, { Component } from 'react'
+import React from 'react'
 
 // component
 const Poster = ({id, title, posterPath, getMovie})  =>  {
-  console.log(title)
+
   return(
     <Link to={`/${id}`} key={id}>
       <div className='poster-wrapper'>
