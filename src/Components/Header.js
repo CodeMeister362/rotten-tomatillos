@@ -3,8 +3,8 @@ import './Header.css'
 import logo from '../assets/logo.png'
 
 // component imports 
-import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import React from 'react'
 
 // component
 const Header = ()  =>  {
