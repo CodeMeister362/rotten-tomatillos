@@ -3,13 +3,13 @@ import './App.css'
 
 // component imports 
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Header from './Components/Header'
 import Spinner from './Components/Spinner'
 import PosterGrid from './Components/PosterGrid'
 import SelectedMovie from './Components/SelectedMovie'
 
-// class constructor 
+// class component
 class App extends React.Component {
   constructor() {
     super()
@@ -49,7 +49,6 @@ class App extends React.Component {
 
 // component render
   render() {
-    // console.log(this.state);
     if (this.state.error !== "") {
       return(
         <div>
@@ -93,7 +92,6 @@ class App extends React.Component {
                   <div>
                   <Header />
                   <SelectedMovie 
-                    key={match.params.id}
                     id={match.params.id}
                     getMovie={this.getMovie}
                     movie={this.state.singleMovie}
