@@ -8,6 +8,7 @@ import Header from './Components/Header'
 import Spinner from './Components/Spinner'
 import PosterGrid from './Components/PosterGrid'
 import SelectedMovie from './Components/SelectedMovie'
+import Search from './Components/Search'
 
 // class component
 class App extends React.Component {
@@ -47,6 +48,19 @@ class App extends React.Component {
     this.setState({ singleMovie: [] })
   }
 
+  getMovieByTitle = (newSearch) => {
+    let lowerCaseTitle = newSearch.toLowerCase()
+
+    let movieByTitle = this.state.movies.movies.filter(movie => {
+      if(movie.title == lowerCaseTitle || movie.title.includes(lowerCaseTitle)){
+        console.log('this', movie)
+        return movie
+      }
+      console.log('here', movieByTitle)
+      this.setState({movies: movie})
+    })
+  }
+
 // component render
   render() {
     if (this.state.error !== "") {
@@ -65,6 +79,7 @@ class App extends React.Component {
                 render = {() => (
                   <div>  
                     <Header />
+                    <Search getMovieByTitle={this.getMovieByTitle} />
                     <Spinner />
                   </div>
                 )
@@ -81,6 +96,7 @@ class App extends React.Component {
               render = {() => (
                 <div>  
                   <Header />
+                  <Search getMovieByTitle={this.getMovieByTitle} />
                   <PosterGrid 
                     movies={this.state.movies.movies}
                     getMovie={this.getMovie}
@@ -93,6 +109,7 @@ class App extends React.Component {
                 return(
                   <div>
                   <Header />
+                  <Search getMovieByTitle={this.getMovieByTitle} />
                   <SelectedMovie 
                     id={match.params.id}
                     getMovie={this.getMovie}

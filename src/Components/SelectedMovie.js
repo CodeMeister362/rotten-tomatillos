@@ -11,6 +11,7 @@ import PropTypes from 'prop-types'
 class SelectedMovie extends React.Component {
   constructor(props)  {
     super(props)
+    console.log('here', props)
       this.state =  {
         movie: [],
         videos: [],
