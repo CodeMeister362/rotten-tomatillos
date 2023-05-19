@@ -11,8 +11,14 @@ describe('Single Movie Functionality', () => {
       .contains('Black Adam')
       .get('.release-date')
       .contains('2022')
-      .get('.average-rating')
-      .contains('4')
+      .get('.tagline')
+      .contains('The world needed a hero. It got Black Adam.')
+      .get('.budget')
+      .contains('$200,000,000')
+      .get('.revenue')
+      .contains('$384,571,691')
+      .get('.iframe')
+      .should('have.attr', 'title', 'YouTube video player')
   })
 
   it('User should be be notified in case of client-side errors', () => {
