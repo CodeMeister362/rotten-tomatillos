@@ -3,7 +3,7 @@ import './Header.css'
 import logo from '../assets/logo.png'
 
 // component imports 
-import React, { Component } from 'react'
+import React from 'react'
 
 // component
 const Header = ()  =>  {

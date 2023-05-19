@@ -2,8 +2,9 @@
 import './PosterGrid.css'
 
 // component imports 
-import React, { Component } from 'react'
+import React from 'react'
 import Poster from './Poster'
+import PropTypes from 'prop-types'
 
 // component 
 const PosterGrid = ({movies, getMovie}) =>  {
@@ -27,3 +28,8 @@ const PosterGrid = ({movies, getMovie}) =>  {
 }
 
 export default PosterGrid
+
+PosterGrid.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  getMovie: PropTypes.func.isRequired
+}

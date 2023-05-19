@@ -5,6 +5,7 @@ import './SelectedMovie.css'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Spinner from './Spinner'
+import PropTypes from 'prop-types'
 
 // component 
 class SelectedMovie extends React.Component {
@@ -26,7 +27,7 @@ class SelectedMovie extends React.Component {
           return response.json()
         }
       })
-      .then((data) => this.setState({ movie: data }))
+      .then((data) => this.setState({ movie: data }, console.log(data)))
       .catch((err)  => this.setState({ error: err.message }))
     }
 
@@ -63,6 +64,8 @@ class SelectedMovie extends React.Component {
   }
 }
 
-
-
 export default SelectedMovie
+
+SelectedMovie.propTypes = {
+  movie: PropTypes.arrayOf(PropTypes.object).isRequired
+}
