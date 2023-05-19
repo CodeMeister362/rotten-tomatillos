@@ -1,4 +1,4 @@
-describe('Dashboard functionality', () => {
+describe('Dashboard Functionality', () => {
   it('User should see the Rotten Tomatillos logo upon page load', () => {
     cy.visit('http://localhost:3000')
       .get('.logo')

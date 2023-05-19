@@ -1,4 +1,4 @@
-describe('user will be able to click into an individual movie', () => {
+describe('Single Movie Functionality', () => {
   it('User should be able to click on a poster and see the associated movie details', () => {
     cy.visit('http://localhost:3000')
       .get('[alt="Black Adam"]').click()
@@ -13,5 +13,16 @@ describe('user will be able to click into an individual movie', () => {
       .contains('2022')
       .get('.average-rating')
       .contains('4')
-  });
-})
+  })
+
+  it('User should be be notified in case of network request errors', () => {
+    cy.intercept(
+      'GET',
+      'https://rancid-tomatillos.herokuapp.com/api/v2/movies',
+      { statusCode: 404 }
+      ).as('getServerFailure')
+    cy.visit('http://localhost:3000')
+    cy.get('.error')
+      .contains('404 Error')
+  })
+});
