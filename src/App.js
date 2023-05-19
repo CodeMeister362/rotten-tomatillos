@@ -3,7 +3,7 @@ import './App.css'
 
 // component imports 
 import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Header from './Components/Header'
 import Spinner from './Components/Spinner'
 import PosterGrid from './Components/PosterGrid'
@@ -52,22 +52,24 @@ class App extends React.Component {
     if (this.state.error !== "") {
       return(
         <div>
-          <p>{this.state.error} Error</p>
-          <p>Sorry, something's gone wrong. Please try again.</p>
+          <p className="error">{this.state.error} Error</p>
+          <p className="error-message">Sorry, something's gone wrong. Please try again.</p>
         </div>
       )
     } else if (this.state.movies.length === 0) {
       return(
           <main className="App">
-            <Route 
-              path="/"
-              render = {() => (
-                <div>  
-                  <Header />
-                  <Spinner />
-                </div>
-              )
-            }/>
+            <Switch>
+              <Route 
+                path="/"
+                render = {() => (
+                  <div>  
+                    <Header />
+                    <Spinner />
+                  </div>
+                )
+              }/>
+            </Switch>
           </main>
       )
     } else {

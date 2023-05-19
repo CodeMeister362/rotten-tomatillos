@@ -2,7 +2,7 @@
 import './PosterGrid.css'
 
 // component imports 
-import React, { Component } from 'react'
+import React from 'react'
 import Poster from './Poster'
 
 // component 

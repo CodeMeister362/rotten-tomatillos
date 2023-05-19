@@ -35,8 +35,8 @@ class SelectedMovie extends React.Component {
     if (this.state.movie.length === 0) {
       return(
         <div>  
-        <Spinner />
-      </div>
+          <Spinner />
+        </div>
       )
     } else {
       return(

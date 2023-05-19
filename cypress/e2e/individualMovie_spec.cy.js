@@ -15,7 +15,7 @@ describe('Single Movie Functionality', () => {
       .contains('4')
   })
 
-  it('User should be be notified in case of network request errors', () => {
+  it('User should be be notified in case of client-side errors', () => {
     cy.intercept(
       'GET',
       'https://rancid-tomatillos.herokuapp.com/api/v2/movies',
@@ -24,5 +24,16 @@ describe('Single Movie Functionality', () => {
     cy.visit('http://localhost:3000')
     cy.get('.error')
       .contains('404 Error')
+  })
+
+  it('User should be be notified in case of server-side errors', () => {
+    cy.intercept(
+      'GET',
+      'https://rancid-tomatillos.herokuapp.com/api/v2/movies',
+      { statusCode: 500 }
+      ).as('getServerFailure')
+    cy.visit('http://localhost:3000')
+    cy.get('.error')
+      .contains('500 Error')
   })
 });
