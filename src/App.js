@@ -18,6 +18,7 @@ class App extends React.Component {
       movies: [],
       singleMovie: [],
       searchedMovie: [],
+      searchInput: false,
       error: ""
     }
   }
@@ -45,14 +46,14 @@ class App extends React.Component {
     this.setState({ singleMovie: [movie] })
   }
 
-  backButton = () =>  {
-    this.setState({ singleMovie: [] })
+  reload = () =>  {
+    window.location.reload();
   }
 
   getMovieByTitle = (newSearch) => {
     let lowerCaseTitle = newSearch.toLowerCase().toString()
     let movieByTitle = this.state.movies.movies.filter(movie => {
-      return movie.title.toLowerCase() === lowerCaseTitle
+      return movie.title.toLowerCase().includes(lowerCaseTitle)
     })
     this.setState({ searchedMovie: movieByTitle})
   }
@@ -91,7 +92,9 @@ class App extends React.Component {
               exact path="/"
               render = {() => (
                 <div>  
-                  <Header />
+                  <Header 
+                    reload={this.reload}
+                  />
                   <Search getMovieByTitle={this.getMovieByTitle} />
                   <PosterGrid 
                     movies={this.state.movies.movies}
@@ -106,12 +109,10 @@ class App extends React.Component {
                 return(
                   <div>
                   <Header />
-                  <Search getMovieByTitle={this.getMovieByTitle} />
                   <SelectedMovie 
                     id={match.params.id}
                     getMovie={this.getMovie}
                     movie={this.state.singleMovie}
-                    backButton={this.backButton} 
                   />
                 </div>
               )}}/>  

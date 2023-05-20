@@ -1,8 +1,11 @@
 describe('Single Movie Functionality', () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000")
+  })
+
   it('User should be able to click on a poster and see the associated movie details', () => {
-    cy.visit('http://localhost:3000')
-      .get('[alt="Black Adam"]').click()
-      cy.url().should('eq', 'http://localhost:3000/436270')
+    cy.get('[alt="Black Adam"]').click()
+      .url().should('eq', 'http://localhost:3000/436270')
       .get('.background')
       .should('have.attr', 'src', 'https://image.tmdb.org/t/p/original//bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg')
       .get('.poster')
@@ -27,8 +30,8 @@ describe('Single Movie Functionality', () => {
       'https://rancid-tomatillos.herokuapp.com/api/v2/movies',
       { statusCode: 404 }
       ).as('getServerFailure')
-    cy.visit('http://localhost:3000')
-    cy.get('.error')
+      .visit('http://localhost:3000')
+      .get('.error')
       .contains('404 Error')
   })
 
@@ -38,8 +41,8 @@ describe('Single Movie Functionality', () => {
       'https://rancid-tomatillos.herokuapp.com/api/v2/movies',
       { statusCode: 500 }
       ).as('getServerFailure')
-    cy.visit('http://localhost:3000')
-    cy.get('.error')
+      .visit('http://localhost:3000')
+      .get('.error')
       .contains('500 Error')
   })
 });

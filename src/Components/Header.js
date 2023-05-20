@@ -3,21 +3,18 @@ import './Header.css'
 import logo from '../assets/logo.png'
 
 // component imports 
-import { Link } from 'react-router-dom'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-// component
-const Header = () => {
-
+// functional component
+const Header = ({reload}) => {
   return(
     <Link to={'/'}>
-    <div>
-      <img className="logo" src={logo} alt="rotten-tomatillos-logo"/>
-    </div>
+      <div className="header-container">
+        <img className="logo" src={logo} alt="rotten-tomatillos-logo" onClick={reload} />
+      </div>
     </Link>
   )
 }
-
-//header will have to be a class component bc the state will have to change in order to understand that something is in the input fields 
 
 export default Header

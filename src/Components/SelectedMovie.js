@@ -7,11 +7,10 @@ import { Link } from 'react-router-dom'
 import Spinner from './Spinner'
 import PropTypes from 'prop-types'
 
-// component 
+// class component 
 class SelectedMovie extends React.Component {
   constructor(props)  {
     super(props)
-    console.log('here', props)
       this.state =  {
         movie: [],
         videos: [],
@@ -19,7 +18,7 @@ class SelectedMovie extends React.Component {
       }
   }
 
-  // lifecycle methods 
+  // component lifecycle methods 
   componentDidMount = () => {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${this.props.id}`)
       .then((response) => {
@@ -71,11 +70,11 @@ class SelectedMovie extends React.Component {
                   <p className="revenue">Revenue ${this.state.movie.movie.revenue.toLocaleString()}</p>
                 </div>
                 <div className="trailer">
-                  <iframe className="iframe" width="545" height="295" src={embedURL} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                  <iframe className="iframe" width="645" height="395" src={embedURL} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
                 </div>
               </div>
             <Link to={"/"}>
-              <button className="back-button" onClick={this.backButton}>back</button>
+              <button className="back-button">back</button>
             </Link>
           </div>
         </div>
@@ -84,9 +83,9 @@ class SelectedMovie extends React.Component {
   }
 }
 
-
 export default SelectedMovie
 
+// prop types 
 SelectedMovie.propTypes = {
   movie: PropTypes.arrayOf(PropTypes.object).isRequired
 }
