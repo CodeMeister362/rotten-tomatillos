@@ -1,10 +1,11 @@
-import React from "react";
+// file imports
 import './Spinner.css'
-// import { Route, useLocation } from 'react-router-dom'
 
+// component imports
+import React from "react";
+
+// funtional component 
 export default function LoadingSpinner() {
-  // const location = useLocation();
-  // console.log(location.pathname);
   return (
     <div className="spinner-container">
       <div className="loading-spinner">

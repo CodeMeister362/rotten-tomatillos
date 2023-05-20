@@ -1,13 +1,15 @@
 describe('Dashboard Functionality', () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000")
+  })
+
   it('User should see the Rotten Tomatillos logo upon page load', () => {
-    cy.visit('http://localhost:3000')
-      .get('.logo')
+    cy.get('.logo')
       .should('have.attr', 'alt', 'rotten-tomatillos-logo')
   });
 
   it('User should see a grid of movie posters upon page load', () => {
-    cy.visit('http://localhost:3000')
-      .get('.poster-img')
+    cy.get('.poster-img')
       .should('have.attr', 'alt', 'Black Adam')
   });
 
@@ -17,8 +19,8 @@ describe('Dashboard Functionality', () => {
       'https://rancid-tomatillos.herokuapp.com/api/v2/movies',
       { statusCode: 404 }
       ).as('getServerFailure')
-    cy.visit('http://localhost:3000')
-    cy.get('.error')
+      .visit('http://localhost:3000')
+      .get('.error')
       .contains('404 Error')
   });
 
@@ -28,8 +30,8 @@ describe('Dashboard Functionality', () => {
       'https://rancid-tomatillos.herokuapp.com/api/v2/movies',
       { statusCode: 500 }
       ).as('getServerFailure')
-    cy.visit('http://localhost:3000')
-    cy.get('.error')
+      .visit('http://localhost:3000')
+      .get('.error')
       .contains('500 Error')
   });
 })

@@ -1,7 +1,10 @@
-import React from 'react'
+// file imports 
 import './Search.css'
 
+// component imports 
+import React from 'react'
 
+// class component
 class Search extends React.Component {
 	constructor(props) {
 		super(props)
@@ -10,7 +13,9 @@ class Search extends React.Component {
 		}
 	}
 
+	// component methods 
 	handleChange = (event) => {
+		event.preventDefault()
     this.setState({ [event.target.name]: event.target.value})
   }
 
@@ -19,6 +24,7 @@ class Search extends React.Component {
 		const newSearch = this.state.title
 		this.props.getMovieByTitle(newSearch)
     this.clearInputs()
+		this.setState({ title: '' })
   }
 
   clearInputs = () => {
@@ -27,21 +33,25 @@ class Search extends React.Component {
     })
   }
 
+	// component render
 	render() {
 		return(
 			<form className='search-form'>
 				<input 
 					className='search-input'
 					type="text"
-					placeholder='Search By Title'
+					placeholder='Search movies by title 🔎' 
 					name='title'
 					value={this.state.title}
 					onChange={event => this.handleChange(event)}
+					onSubmit={this.searchByTitleBtn}
 				/>
-				<button onClick={(event) => {this.searchByTitleBtn(event)}}>SUBMIT</button>
+				<button className="submit-button" type="submit" onClick={this.searchByTitleBtn}></button>
 			</form>
 		)
 	}
 }
 
 export default Search
+
+// prop types 

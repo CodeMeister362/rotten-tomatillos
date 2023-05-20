@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// component
+// functional component
 const Poster = ({id, title, posterPath, getMovie})  =>  {
   return(
     <Link to={`/${id}`} key={id}>
@@ -19,7 +19,7 @@ const Poster = ({id, title, posterPath, getMovie})  =>  {
 
 export default Poster
 
-
+// prop types
 Poster.propTypes = {
   posterPath: PropTypes.any.isRequired,
   title: PropTypes.string.isRequired,
