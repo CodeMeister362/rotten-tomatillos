@@ -18,7 +18,7 @@ class App extends React.Component {
       movies: [],
       singleMovie: [],
       searchedMovie: [],
-      searchInput: false,
+      searchInput: "no",
       error: ""
     }
   }
@@ -33,8 +33,8 @@ class App extends React.Component {
           return response.json()
         }
       })
-      .then((data) => this.setState({movies: data}))
-      .catch((err)  => this.setState({error: err.message})
+      .then((data) => this.setState({ movies: data }))
+      .catch((err)  => this.setState({ error: err.message })
       )
     }
 
@@ -43,11 +43,15 @@ class App extends React.Component {
     const movie = this.state.movies.movies.filter(movie => {
       return movie.id === id
     })
-    this.setState({ singleMovie: [movie] })
+    this.setState({ singleMovie: movie })
   }
 
   reload = () =>  {
     window.location.reload();
+  }
+
+  back = () => {
+    this.setState({ movies: [] })
   }
 
   getMovieByTitle = (newSearch) => {
@@ -55,7 +59,8 @@ class App extends React.Component {
     let movieByTitle = this.state.movies.movies.filter(movie => {
       return movie.title.toLowerCase().includes(lowerCaseTitle)
     })
-    this.setState({ searchedMovie: movieByTitle})
+    this.setState({ searchedMovie: movieByTitle })
+    this.setState({ searchInput: "yes" })
   }
 
 // component render
@@ -67,7 +72,7 @@ class App extends React.Component {
           <p className="error-message">Sorry, something's gone wrong. Please try again.</p>
         </div>
       )
-    } else if (this.state.movies.length === 0) {
+    } if (this.state.movies.length === 0) {
       return(
           <main className="App">
             <Switch>
@@ -81,6 +86,7 @@ class App extends React.Component {
                   </div>
                 )
               }/>
+              <Redirect from="*" to={"/"} />
             </Switch>
           </main>
       )
@@ -100,6 +106,7 @@ class App extends React.Component {
                     movies={this.state.movies.movies}
                     getMovie={this.getMovie}
                     searchedMovie={this.state.searchedMovie}
+                    searchInput={this.state.searchInput}
                   />
                 </div>
               )}/>
@@ -113,9 +120,11 @@ class App extends React.Component {
                     id={match.params.id}
                     getMovie={this.getMovie}
                     movie={this.state.singleMovie}
+                    reload={this.back}
                   />
                 </div>
               )}}/>  
+              <Redirect from="*" to={"/"} />
             </Switch>
           </main>
       )

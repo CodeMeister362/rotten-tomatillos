@@ -28,7 +28,7 @@ class SelectedMovie extends React.Component {
           return response.json()
         }
       })
-      .then((data) => this.setState({ movie: data }, console.log(data)))
+      .then((data) => this.setState({ movie: data }))
       .catch((err)  => this.setState({ error: err.message }))
       fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${this.props.id}/videos`)
       .then((response) => {
@@ -70,11 +70,11 @@ class SelectedMovie extends React.Component {
                   <p className="revenue">Revenue ${this.state.movie.movie.revenue.toLocaleString()}</p>
                 </div>
                 <div className="trailer">
-                  <iframe className="iframe" width="645" height="395" src={embedURL} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+                  <iframe className="iframe" width="645" height="395" src={embedURL} title="YouTube video player" ></iframe>
                 </div>
               </div>
             <Link to={"/"}>
-              <button className="back-button">back</button>
+              <button className="back-button" onClick={this.props.back}>back</button>
             </Link>
           </div>
         </div>

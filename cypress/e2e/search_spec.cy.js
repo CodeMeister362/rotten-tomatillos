@@ -15,8 +15,15 @@ describe('Search Functionality', () => {
   })
 
   it('User should be able to filter movie poster grid based on search input', () => {
-    cy.get('.search-input').type('Black Adam')
+    cy.get('.search-form').type('Black Adam').submit()
       .get('.poster-img')
       .should('have.attr', 'alt', 'Black Adam')
+  })
+
+  it('User should be able notified if no search results are found', () => {
+    cy.get('.search-form').type('test').submit()
+      cy.on('window:alert', (text) => {
+      expect(text).to.equal('There are no results for that search. Try again?');
+    });
   })
 });
