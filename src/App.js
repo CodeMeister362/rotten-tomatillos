@@ -9,6 +9,7 @@ import Spinner from './Components/Spinner'
 import PosterGrid from './Components/PosterGrid'
 import SelectedMovie from './Components/SelectedMovie'
 import Search from './Components/Search'
+import ErrorLanding from './Components/ErrorLanding'
 
 // class component
 class App extends React.Component {
@@ -68,8 +69,10 @@ class App extends React.Component {
     if (this.state.error !== "") {
       return(
         <div>
-          <p className="error">{this.state.error} Error</p>
-          <p className="error-message">Sorry, something's gone wrong. Please try again.</p>
+          <Route render={() => <Redirect to={{pathname: "/error"}} />} />
+          <ErrorLanding 
+            status={this.state.error}
+          />
         </div>
       )
     } if (this.state.movies.length === 0) {
@@ -77,16 +80,25 @@ class App extends React.Component {
           <main className="App">
             <Switch>
               <Route 
-                path="/"
+                exact path="/"
                 render = {() => (
                   <div>  
                     <Header />
-                    <Search getMovieByTitle={this.getMovieByTitle} />
+                    <Search
+                      getMovieByTitle={this.getMovieByTitle} 
+                    />
                     <Spinner />
                   </div>
                 )
               }/>
-              <Redirect from="*" to={"/"} />
+              <Route 
+                path="*"
+                render={() => 
+                <div>
+                  <ErrorLanding/>
+                  <Redirect to={{pathname: "/error"}} />
+                </div>
+                }/>
             </Switch>
           </main>
       )
@@ -111,7 +123,7 @@ class App extends React.Component {
                 </div>
               )}/>
             <Route 
-              path="/:id"
+              exact path="/:id"
               render = {({ match })  =>  {
                 return(
                   <div>
@@ -124,7 +136,14 @@ class App extends React.Component {
                   />
                 </div>
               )}}/>  
-              <Redirect from="*" to={"/"} />
+              <Route 
+                path="*"
+                render={() => 
+                <div>
+                  <ErrorLanding/>
+                  <Redirect to={{pathname: "/error"}} />
+                </div>
+                }/>
             </Switch>
           </main>
       )

@@ -20,8 +20,9 @@ describe('Dashboard Functionality', () => {
       { statusCode: 404 }
       ).as('getServerFailure')
       .visit('http://localhost:3000')
-      .get('.error')
-      .contains('404 Error')
+      .url().should('eq', 'http://localhost:3000/error')
+      .get('.status-code')
+      .contains('404')
   });
 
   it('User should be be notified in case of server-side errors', () => {
@@ -30,8 +31,8 @@ describe('Dashboard Functionality', () => {
       'https://rancid-tomatillos.herokuapp.com/api/v2/movies',
       { statusCode: 500 }
       ).as('getServerFailure')
-      .visit('http://localhost:3000')
-      .get('.error')
-      .contains('500 Error')
+      .url().should('eq', 'http://localhost:3000/error')
+      .get('.status-code')
+      .contains('500')
   });
 })

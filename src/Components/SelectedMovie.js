@@ -6,6 +6,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Spinner from './Spinner'
 import PropTypes from 'prop-types'
+import ErrorLanding from './ErrorLanding'
 
 // class component 
 class SelectedMovie extends React.Component {
@@ -44,7 +45,13 @@ class SelectedMovie extends React.Component {
 
   // component render
   render () {
-    if (this.state.movie.length === 0 || this.state.videos.length === 0 || this.state.videos.videos[0].key == undefined) {
+    if (window.location.toString().includes("error"))  {
+    return(
+      <div>  
+      <ErrorLanding />
+    </div>
+    )
+    } else if (this.state.movie.length === 0 || this.state.videos.length === 0 || this.state.videos.videos[0].key == undefined && !window.location.toString().includes("error")) {
       return(
         <div>  
           <Spinner />
