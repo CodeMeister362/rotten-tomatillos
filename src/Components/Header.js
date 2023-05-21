@@ -5,6 +5,7 @@ import logo from '../assets/logo.png'
 // component imports 
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 // functional component
 const Header = ({reload}) => {
@@ -18,3 +19,9 @@ const Header = ({reload}) => {
 }
 
 export default Header
+
+//PropTypes
+
+Header.propTypes = {
+  reload: PropTypes.func
+}

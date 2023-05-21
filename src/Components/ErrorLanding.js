@@ -3,6 +3,7 @@ import './ErrorLanding.css'
 
 //component imports
 import React from 'react'
+import PropTypes from 'prop-types'
 
 // functional component
 const ErrorLanding = ({ status })  =>  {
@@ -15,3 +16,8 @@ const ErrorLanding = ({ status })  =>  {
 }
 
 export default ErrorLanding
+
+//PropTypes
+ErrorLanding.propTypes = {
+  status: PropTypes.string
+}

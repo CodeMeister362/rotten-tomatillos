@@ -3,6 +3,7 @@ import './Search.css'
 
 // component imports 
 import React from 'react'
+import PropTypes from 'prop-types'
 
 // class component
 class Search extends React.Component {
@@ -55,3 +56,7 @@ class Search extends React.Component {
 export default Search
 
 // prop types 
+Search.propTypes = {
+	title: PropTypes.string,
+	getMovieByTitle: PropTypes.func
+}

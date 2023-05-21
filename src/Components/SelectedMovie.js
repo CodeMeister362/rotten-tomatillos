@@ -48,8 +48,8 @@ class SelectedMovie extends React.Component {
     if (window.location.toString().includes("error"))  {
     return(
       <div>  
-      <ErrorLanding />
-    </div>
+        <ErrorLanding />
+      </div>
     )
     } else if (this.state.movie.length === 0 || this.state.videos.length === 0 || this.state.videos.videos[0].key == undefined && !window.location.toString().includes("error")) {
       return(
@@ -94,5 +94,27 @@ export default SelectedMovie
 
 // prop types 
 SelectedMovie.propTypes = {
-  movie: PropTypes.arrayOf(PropTypes.object).isRequired
+  movie: PropTypes.arrayOf(PropTypes.shape({
+    average_rating: PropTypes.number,
+    backdrop_path: PropTypes.string,
+    budget: PropTypes.number,
+    genres: PropTypes.array,
+    id: PropTypes.number,
+    overview: PropTypes.string,
+    poster_path: PropTypes.string,
+    release_date: PropTypes.string,
+    revenue: PropTypes.number,
+    runtime: PropTypes.number,
+    tagline: PropTypes.string,
+    title: PropTypes.string,
+  })).isRequired,
+  videos: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.shape({
+    id: PropTypes.number,
+    movie_id: PropTypes.number,
+    key: PropTypes.string,
+    site: PropTypes.string,
+    type: PropTypes.string,
+  }))),
+  error: PropTypes.string,
+  back: PropTypes.func
 }
