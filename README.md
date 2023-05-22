@@ -9,7 +9,7 @@ First things first, **Rotten Tomatillos** is not authorized by, nor in any way o
 > ### Installing the files
 > - Fork this [repository]([https://github.com/emlindvall/out-there](https://github.com/CodeMeister362/rotten-tomatillos)) to your GitHub account. 
 > - In your forked respository, click the `code` drop-down menu and copy the SSH key.
-> - On your local machine, open the terminal using  `⌘ + space` + `terminal` and navigate to the location you'd like the flashcards repository directory cloned to. 
+> - On your local machine, open the terminal using  `⌘ + space` + `terminal` and navigate to the location you'd like the repository directory cloned to. 
 > - Once you're there, run `git clone [SSH Key] [Rotten Tomatillos]` via the command line.
 > - Run `npm install`.
 
